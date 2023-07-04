@@ -64,6 +64,8 @@ def removeBg(**kwargs):
             img_np = segmented_img.numpy()  # 将张量转换为NumPy数组
             img_np = ((img_np - img_np.min()) * (255 / (img_np.max() - img_np.min()))).clip(0, 255).astype(np.uint8)  # 将数组值缩放到0到255的范围内，并转换为8位无符号整数
             result_img = Image.fromarray(img_np.transpose(1, 2, 0))  # 将数组转换为图像
+            
+            os.makedirs(remove_img_path, exist_ok=True)
 
             result_img.save(os.path.join(remove_img_path,os.path.basename(result.path)[:-4]+'.jpg'))
 
